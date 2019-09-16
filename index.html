@@ -51,19 +51,24 @@
 
       function handler(entries) {
         for (entry of entries) {
-          if (entry.isIntersecting) {
-            console.log('Intersecting');
-            document.getElementById('nav').classList.remove('sticky-nav');
-          } else {
-            console.log('Non-Intersecting');
-            document.getElementById('nav').classList.add('sticky-nav');
+          var brian = document.querySelector('.text-box');
+          var bounding = brian.getBoundingClientRect();
+          if (bounding.top < 0) {
+              console.log('off - ' + bounding.top);
+              if (entry.isIntersecting) {
+              console.log('Intersecting');
+              document.getElementById('nav').classList.remove('sticky-nav');
+            } else {
+              console.log('Non-Intersecting');
+              document.getElementById('nav').classList.add('sticky-nav');
+            }
           }
         }
+
       }
 
       let observer =  new IntersectionObserver(handler);
       observer.observe(document.querySelector(".text-box"));
-
     </script>
 
     </body>
